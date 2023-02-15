@@ -165,7 +165,7 @@ def format_links(links: list[str]) -> list[str]:
 
     return lines
 
-
+# Q&D testing: create a glossary for the wetppr project.
 if __name__ == "__main__":
     make_glossary( '../../wetppr'
                  , ignore=['index.md'
