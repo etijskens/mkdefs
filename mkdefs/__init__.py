@@ -54,6 +54,13 @@ def list_docs(path_to_mkdocs_yml: Union[str,Path]) -> list:
     if not p.is_dir():
         raise FileNotFoundError()
     for i, filename in enumerate(md_files):
+        if isinstance(filename, dict):
+            # sometimes a nav entry needs to show up differently: e.g.
+            #   nav:
+            #       Assignment: assignment-2022-23.md
+            # these entries are turned into a dictionary: {'Assignment': 'assignment-2022-23.md'}
+            # the following line extracts the filename from it:
+            filename = list(filename.values())[0]
         md_files[i] = p / filename
 
     return md_files
@@ -174,6 +181,7 @@ if __name__ == "__main__":
                           ,'evaluation.md'
                           ,'assignment.md'
                           ,"guide-lines.md"
+                          ,"links.md"
                           ]
                  , verbose=True)
 
