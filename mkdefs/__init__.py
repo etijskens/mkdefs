@@ -94,6 +94,12 @@ def parse_md(file_md: Union[str,Path]) -> list:
         if line.startswith('#'):
             current_title = process_title(line)
             line_done = True
+        elif line.startswith('```'):
+            # beginning of a code block. Skip lines until the end of the code block
+            l += 1
+            while not lines[l].startswith('```'):
+                l += 1
+            line_done = True
         else:
             # look for "**<whatever>**"
             rex_bf  =   r'\*\*[^*]+\*\*'       #  '**blabla bla**'
